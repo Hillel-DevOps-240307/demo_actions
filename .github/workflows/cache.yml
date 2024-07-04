@@ -9,6 +9,9 @@ on:
         type: string     
 
 
+env:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
 jobs:
   test:
     runs-on: ubuntu-latest
