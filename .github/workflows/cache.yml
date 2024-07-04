@@ -7,7 +7,8 @@ on:
         default: 'saaverdo/flask:rc-a5f2e733'
         required: false
         type: string     
-
+  pull_request:
+    
 
 env:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
@@ -24,8 +25,13 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: .m2/
-          key: spring-${{ hashFiles('src/pom.xml') }}
+          key: spring-${{ hashFiles('pom.xml') }}
       - run: mvn clean test 
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          report_paths: '**/TEST-*.xml'
 
   build:
     runs-on: ubuntu-latest
@@ -39,12 +45,12 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: .m2/
-          key: spring-${{ hashFiles('src/pom.xml') }}
+          key: spring-${{ hashFiles('pom.xml') }}
       - run: mvn clean package
       - uses: actions/upload-artifact@v4
         with:
           name: demo-spring-artifact
-          path: src/target/*.jar
+          path: target/*.jar
 
   package-test:
     runs-on: ubuntu-latest

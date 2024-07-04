@@ -3,12 +3,12 @@ WORKDIR /app
 COPY . .
 RUN mvn package
 
-FROM openjdk:17-jdk-alpine as prod
-WORKDIR /app
-COPY --from=builder /app/target/spring-boot-example-0.0.1-SNAPSHOT.jar /app/
-CMD ["java", "-jar", "spring-boot-example-0.0.1-SNAPSHOT.jar"]
-
 FROM openjdk:17-jdk-alpine as dev
 WORKDIR /app
 COPY --from=builder /app/target/spring-boot-example-0.0.1-SNAPSHOT.jar /app
 CMD ["/bin/sh"]
+
+FROM openjdk:17-jdk-alpine as prod
+WORKDIR /app
+COPY --from=builder /app/target/spring-boot-example-0.0.1-SNAPSHOT.jar /app/
+CMD ["java", "-jar", "spring-boot-example-0.0.1-SNAPSHOT.jar"]

@@ -13,11 +13,12 @@ jobs:
   do_smth:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: github.event.inputs.DOCKER_IMAGE
+      DOCKER_IMAGE: ${{ github.event.inputs.DOCKER_IMAGE }}
     steps:
       - run: echo "Image is $DOCKER_IMAGE"
 
   call-smoke-test:
-    uses: .github/workflows/smoke_test_services.yml@main
+    needs: [do_smth]
+    uses: ./.github/workflows/smoke_test_services.yml
     with:
       DOCKER_IMAGE: github.event.inputs.DOCKER_IMAGE
