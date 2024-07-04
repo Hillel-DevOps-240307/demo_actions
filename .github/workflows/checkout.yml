@@ -8,7 +8,8 @@ jobs:
     steps:
       - run: ls -l
 
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       
       - run: ls -l
 
