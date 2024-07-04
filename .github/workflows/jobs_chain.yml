@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
       - hello-world
+      - hello-world-2
     steps:
       - run: echo "${{ toJSON(github) }}"
       - run: echo "Hello, ${{ github.event.inputs.NAME }}!"    

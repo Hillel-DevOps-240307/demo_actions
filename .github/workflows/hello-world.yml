@@ -13,6 +13,8 @@ env:
 
 jobs:
   hello-world:
+    env:
+      ENV_VAR: "another value"
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello, World!"
