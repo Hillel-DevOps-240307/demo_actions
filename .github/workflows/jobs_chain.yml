@@ -26,6 +26,7 @@ jobs:
     runs-on: org
     env:
       VAR_2: "job_2"
+      NAME: ${{ github.event.inputs.NAME }}
     steps:
       - run: echo "Hello, World 2!"
       - run: echo "VARS - $VAR_1, $VAR_2"
