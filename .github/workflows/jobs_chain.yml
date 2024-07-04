@@ -27,8 +27,9 @@ jobs:
       VAR_2: "job_2"
       NAME: ${{ github.event.inputs.NAME }}
     steps:
-      - run: echo "Hello, World 2!"
-      - run: echo "VARS - $VAR_1, $VAR_2"
+      - run: |
+          echo "Hello, World 2!"
+          echo "VARS - $VAR_1, $VAR_2"
       - run: echo "env.VAR2 - ${{ env.VAR_2 }}"
       - name: List env vars
         run: env
@@ -40,5 +41,5 @@ jobs:
       - hello-world-2
     steps:
       - run: echo "${{ toJSON(github) }}"
-      - run: echo "Hello, ${{ github.event.inputs.NAME }}!"    
+      - run: echo "Hello, ${{ inputs.NAME }}!"    
 
