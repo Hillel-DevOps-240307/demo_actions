@@ -40,7 +40,5 @@ jobs:
           - 8003:8000
     steps:
       - name: Check DB connection
-        run: |
-          sleep 20
-          RC=$(curl -s -o /dev/null -w "%{http_code}" http://appka:8003)
-          echo $RC        
+        run: curl -s -o /dev/null -w "%{http_code}" http://appka:8003
+
