@@ -7,7 +7,6 @@ on:
         default: 'neo'
         required: false
         type: string 
-
   push:
 
 env:
@@ -31,7 +30,8 @@ jobs:
       - run: echo "Hello, World 2!"
       - run: echo "VARS - $VAR_1, $VAR_2"
       - run: echo "env.VAR2 - ${{ env.VAR_2 }}"
-      - run: env
+      - name: List env vars
+        run: env
 
   hello_name:
     runs-on: ec2
