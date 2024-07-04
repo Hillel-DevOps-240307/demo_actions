@@ -19,3 +19,5 @@ jobs:
           path: tf-modules
 
       - run: ls -l
+      - run: cd src
+      - run: ls -l
