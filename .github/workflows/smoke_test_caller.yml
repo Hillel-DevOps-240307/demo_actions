@@ -18,6 +18,6 @@ jobs:
       - run: echo "Image is $DOCKER_IMAGE"
 
   call-smoke-test:
-    uses: .github/workflows/smoke_test_services.yml@main
+    uses: ./.github/workflows/smoke_test_services.yml
     with:
       DOCKER_IMAGE: github.event.inputs.DOCKER_IMAGE
