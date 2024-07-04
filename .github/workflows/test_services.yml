@@ -20,7 +20,7 @@ on:
 jobs:
   smoke-test:
     runs-on: ubuntu-latest
-    container: curlimages/curl
+    # container: curlimages/curl
     services:
       db:
         image: mariadb:latest
@@ -33,12 +33,15 @@ jobs:
           --health-cmd "healthcheck.sh --su-mysql --connect --innodb_initialized"
           --health-interval 20s
           --health-timeout 5s
-          --health-retries 5          
+          --health-retries 5      
+        ports:
+          - 3306:3306    
       appka:
         image: ${{ github.event.inputs.DOCKER_IMAGE }}
         ports:
           - 8003:8000
     steps:
       - name: Check DB connection
-        run: curl -s -o /dev/null -w "%{http_code}" http://appka:8000
-
+        run: curl -s -o /dev/null -w "%{http_code}" http://appka:8003
+      - name: List containers
+        run: docker ps
