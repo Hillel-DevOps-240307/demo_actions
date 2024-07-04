@@ -41,7 +41,7 @@ jobs:
         ports:
           - 8003:8000
     steps:
-      - name: Check DB connection
-        run: curl -o /dev/null -w "%{http_code}" http://appka:8003
       - name: List containers
         run: docker ps
+      - name: Check DB connection
+        run: curl -o /dev/null -w "%{http_code}" http://127.0.0.1:8003
