@@ -36,5 +36,6 @@ jobs:
     needs: 
       - hello-world
     steps:
+      - run: echo "${{ toJSON(github) }}"
       - run: echo "Hello, ${{ github.event.inputs.NAME }}!"    
 
