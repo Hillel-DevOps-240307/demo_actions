@@ -1,0 +1,23 @@
+name: call Integration test workflow
+on: 
+   workflow_dispatch:
+    inputs:
+      DOCKER_IMAGE:
+        description: 'An image name passed from the caller workflow'
+        default: 'saaverdo/flask:rc-a5f2e733'
+        required: false
+        type: string     
+
+
+jobs:
+  do_smth:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE: github.event.inputs.DOCKER_IMAGE
+    steps:
+      - run: echo "Image is $DOCKER_IMAGE"
+
+  call-smoke-test:
+    uses: .github/workflows/smoke_test_services.yml@main
+    with:
+      DOCKER_IMAGE: github.event.inputs.DOCKER_IMAGE
