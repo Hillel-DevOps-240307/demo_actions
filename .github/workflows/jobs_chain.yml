@@ -34,7 +34,7 @@ jobs:
       - run: env
 
   hello_name:
-    runs-on: ubuntu-latest
+    runs-on: ec2
     needs: 
       - hello-world
       - hello-world-2
