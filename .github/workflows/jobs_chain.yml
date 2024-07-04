@@ -16,7 +16,7 @@ env:
 
 jobs:
   hello-world:
-    runs-on: ubuntu-latest
+    runs-on: local
     steps:
       - run: echo "Hello, World!"
       - run: echo "VAR1 - $VAR_1"
