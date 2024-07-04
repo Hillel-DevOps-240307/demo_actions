@@ -42,6 +42,6 @@ jobs:
           - 8003:8000
     steps:
       - name: Check DB connection
-        run: curl -s -o /dev/null -w "%{http_code}" http://appka:8003
+        run: curl -o /dev/null -w "%{http_code}" http://appka:8003
       - name: List containers
         run: docker ps
