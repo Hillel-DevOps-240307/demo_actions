@@ -58,6 +58,6 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: demo-spring-artifact
+          name: demo-spring-artifact-dev
       - name: Display structure of downloaded files
         run: ls -R
