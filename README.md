@@ -1,4 +1,4 @@
-## Simple app
+## Simple app - test
 This simple flask app is working with `mysql` and `sqlite`.  
 It will show client's IP and server's hostname and write this info into sqlite or mysql database.  
 Database usage depends on environment variable `FLASK_CONFIG`. By default sqlite will be used.  
