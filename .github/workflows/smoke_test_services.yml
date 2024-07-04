@@ -39,7 +39,7 @@ jobs:
       appka:
         image: ${{ github.event.inputs.DOCKER_IMAGE }}
         env:
-          FLASK_CONFIG: dev
+          FLASK_CONFIG: default
         ports:
           - 8003:8000
     steps:
