@@ -23,7 +23,7 @@ jobs:
       - run: echo "env.VAR2 - ${{ env.VAR_2 }}"
 
   hello-world-2:
-    runs-on: ubuntu-latest
+    runs-on: local
     env:
       VAR_2: "job_2"
     steps:
