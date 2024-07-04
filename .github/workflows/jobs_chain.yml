@@ -1,4 +1,4 @@
-name: 'hello-world workflow'
+name: 'jobs chain workflow'
 on: 
   workflow_dispatch:
     inputs:
@@ -27,4 +27,4 @@ jobs:
       - hello-world
     steps:
       - run: echo "Hello, ${{ github.event.inputs.NAME }}!"    
-      
+
