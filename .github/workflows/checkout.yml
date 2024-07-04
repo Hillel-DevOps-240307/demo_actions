@@ -1,0 +1,21 @@
+name: 'Checkout_workflow'
+on: 
+  workflow_dispatch:
+
+jobs:
+  checkout_repos:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ls -l
+
+      - uses: actions/checkout@v4
+      
+      - run: ls -l
+
+      - name: Checkout another repo
+        uses: actions/checkout@v4
+        with:
+          repository: Hillel-DevOps-240307/terraform-modules
+          path: tf-modules
+
+      - run: ls -l
