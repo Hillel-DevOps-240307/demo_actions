@@ -1,12 +1,12 @@
 name: 'hello-world workflow'
 on: 
   workflow_dispatch:
-    inputs:
-      NAME:
-        description: 'name'
-        default: 'neo'
-        required: false
-        type: string 
+    # inputs:
+    #   NAME:
+    #     description: 'name'
+    #     default: 'neo'
+    #     required: false
+    #     type: string 
 
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: echo "Hello, World!"
 
-  hello_name:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello, ${{ github.event.inputs.NAME }}!"    
+  # hello_name:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Hello, ${{ github.event.inputs.NAME }}!"    
