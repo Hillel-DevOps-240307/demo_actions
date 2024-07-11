@@ -59,9 +59,18 @@ jobs:
         with:
           paths: /demo/prod/db/MYSQL_HOST
       # We get MYSQL_HOST as an env var
+
+      - name: echo MYSQL_HOST
+        env:
+          secret_name: ${{ env.MYSQL_HOST }}
+        run: |
+          echo "$secret_name, ${{ env.MYSQL_HOST }}""
+
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        env:
+          DB_HOST: ${{ env.MYSQL_HOST }}
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
