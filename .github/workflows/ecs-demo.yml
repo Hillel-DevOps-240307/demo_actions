@@ -64,7 +64,7 @@ jobs:
         env:
           secret_name: ${{ env.MYSQL_HOST }}
         run: |
-          echo "$secret_name, ${{ env.MYSQL_HOST }}""
+          echo "$secret_name, ${{ env.MYSQL_HOST }}"
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
