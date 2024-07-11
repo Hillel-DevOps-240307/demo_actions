@@ -3,7 +3,7 @@ name: Deploy to Amazon ECS
 on:
   workflow_dispatch:
     inputs:
-      IMAGE_TAG:
+      imageTag:
         description: 'An image tag'
         default: 'test'
         required: true
@@ -14,6 +14,7 @@ on:
           - latest
         
 env:
+  IMAGE_TAG: ${{ github.event.inputs.imageTag }}
   AWS_DEFAULT_REGION: eu-central-1
   ECS_SERVICE: gha-ci-svc
   ECS_CLUSTER: DemoFargate
