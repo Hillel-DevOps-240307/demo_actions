@@ -57,8 +57,7 @@ jobs:
       - name: aws-ssm-to-env
         uses: eliasjcjunior/aws-ssm-parameters-action@main
         with:
-          paths: |
-          /demo/prod/db/MYSQL_HOST
+          paths: /demo/prod/db/MYSQL_HOST
       # We get MYSQL_HOST as an env var
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
