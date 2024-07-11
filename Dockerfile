@@ -1,7 +1,7 @@
 FROM python:3.8.0-alpine
 
 WORKDIR /app
-COPY ./flask_app /app
+COPY . .
 
 RUN apk --no-cache --update add build-base \
                                 pkgconf \
