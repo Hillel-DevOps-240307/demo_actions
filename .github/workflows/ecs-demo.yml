@@ -77,7 +77,6 @@ jobs:
           image: ${{ env.image_name }}:${{ env.IMAGE_TAG }}
           environment-variables: |
               FLASK_CONFIG=mysql
-              MYSQL_HOST=${{ env.MYSQL_HOST }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
