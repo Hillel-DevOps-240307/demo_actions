@@ -16,10 +16,10 @@ on:
 env:
   IMAGE_TAG: ${{ github.event.inputs.imageTag }}
   AWS_DEFAULT_REGION: eu-central-1
-  ECS_SERVICE: gha-ci-svc
-  ECS_CLUSTER: DemoFargate
+  ECS_SERVICE: gha-svc-new
+  ECS_CLUSTER: gh-cluster
   ECS_TASK_DEFINITION: .aws/gha-task-definition.json
-  CONTAINER_NAME: "appka"
+  CONTAINER_NAME: "flask-appka"
   image_name: "${{ secrets.DOCKERHUB_USERNAME }}/flask"
 
 jobs:
