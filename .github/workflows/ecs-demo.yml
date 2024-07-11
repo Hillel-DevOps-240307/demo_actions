@@ -1,0 +1,72 @@
+name: Deploy to Amazon ECS
+
+on:
+  workflow_dispatch:
+    inputs:
+      IMAGE_TAG:
+        description: 'An image tag'
+        default: 'test'
+        required: true
+        type: choice
+        options:
+          - test
+          - stable
+          - latest
+        
+env:
+  AWS_DEFAULT_REGION: eu-central-1
+  ECS_SERVICE: gha-ci-svc
+  ECS_CLUSTER: DemoFargate
+  ECS_TASK_DEFINITION: .aws/gha-task-definition.json
+  CONTAINER_NAME: "appka"
+
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build, tag, and push image to DockerHUB
+        id: build-image
+        env:
+          image_name: "${{ secrets.DOCKERHUB_USERNAME }}/flask"
+        run: |
+          # Build a docker container and
+          # push it to DockerHUB
+          docker build -t $image_name:$IMAGE_TAG .
+          docker push $image_name:$IMAGE_TAG
+          echo "image=$image_name:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: $image_name:$IMAGE_TAG
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true

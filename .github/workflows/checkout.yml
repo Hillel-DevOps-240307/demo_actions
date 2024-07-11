@@ -10,7 +10,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-      
+        with:
+          path: main
+          
       - run: ls -l
 
       - name: Checkout another repo
